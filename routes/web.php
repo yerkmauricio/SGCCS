@@ -5,6 +5,7 @@ use App\Http\Controllers\Usercontroller;
 use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TipoCasoController;
 use App\Http\Controllers\TipoMensajeController;
 use App\Http\Controllers\TipoPersonaController;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,7 @@ Route::resource('/personas',PersonaController::class) ;
 Route::resource('/mensajes',MensajeController::class);
 Route::resource('/tipo_mensajes',TipoMensajeController::class);
 Route::resource('/tipo_personas',TipoPersonaController::class);
+Route::resource('/tipo_casos',TipoCasoController::class);
 
 Route::resource('users',Usercontroller::class)->names('admin.users') ;
 

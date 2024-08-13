@@ -15,7 +15,7 @@ return [
     */
 
     'title' => '',
-    'title_prefix' => 'SGM |',
+    'title_prefix' => 'SGCCS |',
     'title_postfix' => '',
 
     /*
@@ -344,32 +344,53 @@ return [
             'can' => 'mensajes.index',
         ],
         [
-            'text' => 'ADMINISTRAR MENSAJES',
-            'icon' => 'fab fa-whatsapp',
+            'text' => 'CASOS',
+            'icon' => 'fas fa-gavel',
             'submenu' => [
+                
                 [
-                    'text' => 'Enviar Mensaje',
-
-                    'icon' => 'fas fa-paper-plane',
-                    'url' => 'mensajes/create',
-                    'can' => 'mensajes.create',
-                ],
-                [
-                    'text' => 'Crear mensaje',
+                    'text' => 'Crear caso',
                     'icon' => 'fas fa-envelope',
-                    'url' => 'tipo_mensajes/create',
-                    'can' => 'tipo_mensajes.create',
+                    'url' => 'tipo_casos/create',
+                    //'can' => 'tipo_mensajes.create',
                 ],
                 [
-                    'text' => 'Listar mensaje',
+                    'text' => 'Listar caso',
                     'icon' => 'fas fa-list',
-                    'url' => 'tipo_mensajes',
-                    'can' => 'tipo_mensajes.index',
+                    'url' => 'tipo_casos',
+                    //'can' => 'tipo_mensajes.index',
                 ],
 
 
             ],
         ],
+        // [
+        //     'text' => 'ADMINISTRAR MENSAJES',
+        //     'icon' => 'fab fa-whatsapp',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Enviar Mensaje',
+
+        //             'icon' => 'fas fa-paper-plane',
+        //             'url' => 'mensajes/create',
+        //             'can' => 'mensajes.create',
+        //         ],
+        //         [
+        //             'text' => 'Crear mensaje',
+        //             'icon' => 'fas fa-envelope',
+        //             'url' => 'tipo_mensajes/create',
+        //             'can' => 'tipo_mensajes.create',
+        //         ],
+        //         [
+        //             'text' => 'Listar mensaje',
+        //             'icon' => 'fas fa-list',
+        //             'url' => 'tipo_mensajes',
+        //             'can' => 'tipo_mensajes.index',
+        //         ],
+
+
+        //     ],
+        // ],
         [
             'text' => 'GESTION DE PERSONAL',
             'icon' => 'fas fa-users',

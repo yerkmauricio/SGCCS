@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="card" style="font-family: 'Times New Roman', Times, serif;">
         <div class="card-body">
-            <h1>{{ ucfirst('modificar al tipo de mensaje:') }}&nbsp;{{ ucfirst($tipo_caso->nombre) }}</h1>
+            <h1>{{ ucfirst('modificar al tipo de caso:') }}&nbsp;{{ ucfirst($tipo_caso->nombre) }}</h1>
         </div>
     </div>
 @stop
@@ -32,7 +32,7 @@
 
                 {{-- nombre --}}
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Nombre del tipo de caso</label>
+                    <label for="formGroupExampleInput">Nombre del tipo de mensaje</label>
                     <input type="text" class="form-control" name="nombre"
                         value="{{ old('nombre', $tipo_caso->nombre) }}"
                         pattern="^(?!.*([A-Za-záéíóúüñÑ])\1{3})[A-Za-záéíóúüñÑ\s\d¡!¿?]+"
@@ -46,10 +46,10 @@
 
                 {{-- descripcion --}}
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Descripccion de caso</label>
+                    <label for="formGroupExampleInput">Contenido del mensaje</label>
                     <!-- Reemplaza el input de texto con Summernote -->
                     <textarea id="summernote" class="form-control" name="descripcion"
-                        placeholder="Ingrese el contenido del tipo de caso">{{ old('descripcion', $tipo_caso->descripcion) }}</textarea>
+                        placeholder="Ingrese el contenido del tipo de mensaje">{{ old('descripcion', $tipo_caso->descripcion) }}</textarea>
                     @error('descripcion')
                         <span style="color: red;">{{ $message }}</span>
                     @enderror
@@ -57,7 +57,7 @@
 
                 {{-- estado --}}
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Estado del tipo de caso</label>
+                    <label for="formGroupExampleInput">Estado del tipo de mensaje</label>
                     <select class="form-control" name="estado">
                         <option value="1" @if (old('estado', $tipo_caso->estado) == '1') selected @endif>activo</option>
                         <option value="0" @if (old('estado', $tipo_caso->estado) == '0') selected @endif>inactivo</option>
@@ -67,14 +67,26 @@
                     @enderror
                 </div>
 
-                
-
-                <div class="form-group">
-                    <label>Imagen seleccionada:</label>
-                    <img id="imagePreview" src="#" alt="Imagen seleccionada"
-                        style="max-width: 200px; display: none;">
+                 {{-- gravedad --}}
+                 <div class="form-group">
+                    <label for="formGroupExampleInput">Gravedad </label>
+                    <select class="form-control" name="gravedad">
+                        <option value="1" @if (old('gravedad', $tipo_caso->gravedad) == '1') selected @endif>MEDIO
+                        </option>
+                        <option value="2" @if (old('gravedad', $tipo_caso->gravedad) == '2') selected @endif>MEDIO GRAVE
+                        </option>
+                        <option value="3" @if (old('gravedad', $tipo_caso->gravedad) == '3') selected @endif>GRAVE
+                        </option>
+                        <option value="4" @if (old('gravedad', $tipo_caso->gravedad) == '4') selected @endif>MUY GRAVE
+                        </option>
+                        <option value="5" @if (old('gravedad', $tipo_caso->gravedad) == '5') selected @endif>DEMASIADO GRAVE
+                        </option>
+                       
+                    </select>
+                    @error('gravedad')
+                        <span style="color: red;">{{ $message }}</span>
+                    @enderror
                 </div>
-
 
 
 

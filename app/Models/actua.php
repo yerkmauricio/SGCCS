@@ -6,19 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class tipo_mensaje extends Model
+class actua extends Model
 {
     use HasFactory,SoftDeletes;
-
-    protected $table = 'tipo_mensajes';
+    protected $table = 'actuas';
 
     protected $fillable = [
         'nombre',
         'descripcion',
         'estado',
+        'documento',
+        'tipo',
         'fecha'
     ];
-    
     public static function boot()
     {
         parent::boot();
@@ -31,9 +31,8 @@ class tipo_mensaje extends Model
     }
 
 
-    public function mensajes()
+    public function casos()
     {
-        return $this->belongsTo(mensaje::class);
+        return $this->belongsTo(caso::class);
     }
-
 }

@@ -172,96 +172,33 @@
             }
         });
     </script>
-    <!-- Incluye Summernote y sus dependencias -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@latest/dist/summernote-bs5.js"></script>
-    <!-- Agrega tu script personalizado para Summernote -->
+   <script src="https://cdn.jsdelivr.net/npm/summernote@latest/dist/summernote-bs5.js"></script>
+   <script>
+       $(document).ready(function() {
+           // Obtener el nombre del usuario autenticado
+           var usuarioNombre = '{{ ucfirst(auth()->user()->name) }}';
+           var usuarioApellido = '{{ ucfirst(auth()->user()->apellidopaterno) }}';
 
-    <script>
-        $(document).ready(function() {
-            // Obtener el nombre del usuario autenticado
-            var usuarioNombre = '{{ ucfirst(auth()->user()->name) }}';
-            var usuarioApellido = '{{ ucfirst(auth()->user()->apellidopaterno) }}';
+           // Inicializar Summernote
+           $('#summernote').summernote({
+               tabsize: 2,
+               height: 200,
+               toolbar: [
+                   ['font', ['bold', 'clear']],
+                   //['fontname', ['fontname']],
+                   ['para', ['ul']],
+                   //['insert', ['link']],
+                   ['view', ['fullscreen']],
+               ],
+               icons: {
+                   'align': '<i class="custom-icon-align"></i>',
+                   'italic': '<i class="custom-icon-italic"></i>',
+               },
+            
+           });
 
-            // Inicializar Summernote
-            $('#summernote').summernote({
-                tabsize: 2,
-                height: 200,
-                toolbar: [
-                    ['font', ['bold', 'clear']],
-                    //['fontname', ['fontname']],
-                    ['para', ['ul']],
-                    //['insert', ['link']],
-                    ['view', ['fullscreen']],
-                ],
-                icons: {
-                    'align': '<i class="custom-icon-align"></i>',
-                    'italic': '<i class="custom-icon-italic"></i>',
-                },
-                callbacks: {
-                    onPaste: function(e) {
-                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData)
-                            .getData('Text');
-                        e.preventDefault();
-                        document.execCommand('insertText', false, bufferText);
-                    },
-                    onInit: function() {
-                        // Deshabilitar la edición de los spans no editables
-                        $('.non-editable').attr('contenteditable', 'false');
-                    },
-                    onKeydown: function(e) {
-                        // Prevenir la eliminación del texto no editable
-                        if (e.keyCode === 8 || e.keyCode === 46) { // Backspace o Delete
-                            var selection = window.getSelection();
-                            if (selection.rangeCount > 0) {
-                                var range = selection.getRangeAt(0);
-                                if (range.startContainer.parentElement.classList.contains(
-                                        'non-editable') ||
-                                    range.endContainer.parentElement.classList.contains('non-editable')
-                                ) {
-                                    e.preventDefault();
-                                }
-                            }
-                        }
-                    },
-                    onKeyup: function(e) {
-                        // Prevenir la edición del texto no editable
-                        var nonEditableElements = $('.non-editable');
-                        nonEditableElements.each(function() {
-                            $(this).attr('contenteditable', 'false');
-                        });
-                    }
-                }
-            });
-
-            // Función para actualizar el contenido del editor
-            function actualizarContenido() {
-                var tipoMensaje = $('input[name="nombre"]').val().toUpperCase();
-                var contenido = '<p class="non-editable">' + tipoMensaje + '</p><p class="non-editable">' +
-                    usuarioNombre + ' ' + usuarioApellido + '</p><p><br></p>';
-                $('#summernote').summernote('code', contenido);
-            }
-
-            // Evento de cambio en el campo de "Nombre del tipo de mensaje"
-            $('input[name="nombre"]').on('input', function() {
-                actualizarContenido();
-            });
-
-            // Llamar a la función para inicializar el contenido al cargar la página
-            actualizarContenido();
-
-
-            $('form').on('submit', function() {
-                var summernoteContent = $('#summernote').summernote('code');
-                var cleanedContent = $('<div>').html(summernoteContent).find('.non-editable').remove().end()
-                    .html();
-                $('#summernote').summernote('code', cleanedContent);
-            });
-
-
-
-        });
-    </script>
+         
+       });
+   </script>
 
 @stop
